@@ -2,8 +2,8 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { Utilisateur } from './utilisateur.entity';
 import { Materiel } from './materiel.entity';
 
-@Entity('demandes')
-export class Demande {
+@Entity('annonces')
+export class Annonce {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -25,4 +25,9 @@ export class Demande {
   @Column({ type: 'decimal', precision: 9, scale: 6, nullable: true })
   longitude: number;
 
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  ville: string;
+
+  @Column({ type: 'float', nullable: true })
+  distance: number;
 }

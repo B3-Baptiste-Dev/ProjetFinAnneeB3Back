@@ -1,13 +1,13 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { AnnonceService } from './annonces.service';
-import { Demande } from '../entities/demande.entity';
+import { Annonce } from '../entities/annonce.entity';
 
 @Controller('annonces')
 export class AnnonceController {
   constructor(private annonceService: AnnonceService) {}
 
   @Get()
-  findAll(): Promise<Demande[]> {
+  findAll(): Promise<Annonce[]> {
     return this.annonceService.findAll();
   }
 
@@ -17,7 +17,16 @@ export class AnnonceController {
     @Query('latMax') latMax: number,
     @Query('longMin') longMin: number,
     @Query('longMax') longMax: number,
-  ): Promise<Demande[]> {
-    return this.annonceService.findInArea(latMin, latMax, longMin, longMax);
+    @Query('userLat') userLat: number, // Nouveau
+    @Query('userLong') userLong: number, // Nouveau
+  ): Promise<Annonce[]> {
+    return this.annonceService.findInArea(
+      latMin,
+      latMax,
+      longMin,
+      longMax,
+      userLat,
+      userLong,
+    );
   }
 }
